@@ -11,13 +11,15 @@ def home():
     """View for the Home page of your website."""
     agent = request.user_agent
 
-    return f"This is your homepage :)  - {agent} "
+    return f"This is your homepage :)  - {agent} " 
 
-@app.route("/hi/<string:name>/<int:age>")
-def greetings(name, age):
+@app.route("/hi/<string:name>") #/hi/Vasyl?age
+def greetings(name):
     name = name.upper()
+    age = request.args.get("age")
+    year = 2024 - int(age)
 
-    return f"Welcome, {name} - {age}"
+    return f"Welcome, {name}  {year}"
 
 if __name__ == "__main__":
     app.run()  # Launch built-in web server and run this Flask webapp, debug=True
