@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Hello{% endblock %}
+
+{% block content %}
+<nav class="vertical-menu">
+    <ul>
+        <li>
+            <a href="{{ url_for('users.greetings', name='John', age=30) }}">Greet John</a>
+        </li>
+        <li>
+            <a href="{{ url_for('users.admin') }}">Admin</a>
+        </li>
+    </ul>
+</nav>
+
+<h1>Hello :)</h1>
+<h1>User: {{ name | upper }}</h1>
+
+{% if age %}
+    <h1 class="age provided">Age: {{ age }}</h1>
+{% else %}
+    <h2 class="age not-provided">Age: Not provided</h2>
+{% endif %}
+{% endblock %}

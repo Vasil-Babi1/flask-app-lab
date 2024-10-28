@@ -62,3 +62,38 @@ footer {
 footer p {
     margin: 0;
 }
+
+
+.vertical-menu {
+    width: 200px;
+}
+
+.vertical-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.vertical-menu ul li {
+    margin: 5px 0;
+}
+
+.vertical-menu ul li a {
+    text-decoration: none;
+    color: #000;
+    background-color: #f8f8f8;
+    padding: 10px;
+    display: block;
+}
+
+.vertical-menu ul li a:hover {
+    background-color: #ddd;
+}
+
+
+.age.provided {
+    color: green;
+}
+
+.age.not-provided {
+    color: red;
+}
