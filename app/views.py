@@ -27,3 +27,7 @@ def admin():
     to_url = url_for("greetings", name="administrator", age=45, _external=True)     # "http://localhost:8080/hi/administrator?age=45"
     print(to_url)
     return redirect(to_url)
+
+@app.route("/resume")
+def resume():
+    return render_template("resume.html", title="Резюме студента Бабійчука Василя")
