@@ -1,6 +1,32 @@
-from flask import request, render_template, redirect, url_for, make_response
+from flask import request, render_template, redirect, url_for, make_response, session, flash
 from . import user_bp
 from datetime import timedelta, datetime
+
+@user_bp.route("/profile")
+def get_profile():
+    if "username" in session:
+        username_value = session["username"]
+        return render_template("profile.html", username=username_value)
+    flash("Invalid: Session.", "danger")
+    return redirect(url_for("users.login"))
+
+@user_bp.route("/login",  methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form["login"]
+        session["username"] = username
+        flash("Success: session added successfully.", "success")
+        return redirect(url_for("users.get_profile"))
+    return render_template("login.html")
+
+
+
+@user_bp.route('/logout')
+def logout():
+    # Видалення користувача із сесії
+    session.pop('username', None)
+    session.pop('age', None)
+    return redirect(url_for('users.get_profile'))
 
 @user_bp.route("/hi/<string:name>") 
 def greetings(name):
@@ -18,19 +44,19 @@ def admin():
 
 
 
-@bp.route('/set_cookie')
+@user_bp.route('/set_cookie')
 def set_cookie():
     response = make_response('Кука встановлена')
     response.set_cookie('username', 'student', max_age=timedelta(seconds=60))
     response.set_cookie('color', '', max_age=timedelta(seconds=60))
     return response
 
-@bp.route('/get_cookie')
+@user_bp.route('/get_cookie')
 def get_cookie():
     username = request.cookies.get('username')
     return f'Користувач: {username}'
 
-@bp.route('/delete_cookie')
+@user_bp.route('/delete_cookie')
 def delete_cookie():
     response = make_response('Кука видалена')
     response.set_cookie('username', '', expires=0) # response.set_cookie('username', '', max_age=0)
