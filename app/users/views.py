@@ -6,14 +6,54 @@ from datetime import timedelta, datetime
 def get_profile():
     if "username" in session:
         username_value = session["username"]
-        return render_template("profile.html", username=username_value)
+        cookies = request.cookies
+        color_scheme = session.get('color_scheme', 'light')
+        return render_template("profile.html", username=username_value, cookies=cookies, color_scheme=color_scheme)
     flash("Invalid: Session.", "danger")
     return redirect(url_for("users.login"))
+
+@user_bp.route('/add_cookie', methods=['POST'])
+def add_cookie():
+    key = request.form.get('cookie-key-add')
+    value = request.form.get('cookie-value-add')
+    expire = int(request.form.get('cookie-expire-add', 0))
+    response = make_response(redirect(url_for('users.get_profile')))
+    response.set_cookie(key, value, max_age=expire)
+    flash('Success: cookie added.', 'success')
+    return response
+
+@user_bp.route('/remove_cookie', methods=['POST'])
+def remove_cookie():
+    key = request.form.get('cookie-key-remove')
+    response = make_response(redirect(url_for('users.get_profile')))
+    response.set_cookie(key, '', expires=0)
+    flash('Success: cookie removed.', 'success')
+    return response
+
+@user_bp.route('/remove_all_cookies', methods=['POST'])
+def remove_all_cookies():
+    response = make_response(redirect(url_for('users.get_profile')))
+    for key in request.cookies:
+        response.set_cookie(key, '', expires=0)
+    flash('Success: all cookies removed.', 'success')
+    return response
+
+@user_bp.route('/change_color_scheme')
+def change_color_scheme():
+    color_scheme = session.get('color_scheme', 'light')
+    new_color_scheme = 'dark' if color_scheme == 'light' else 'light'
+    session['color_scheme'] = new_color_scheme
+
+    return redirect(url_for('users.get_profile'))
 
 @user_bp.route("/login",  methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-        username = request.form["login"]
+        username = request.form["username"]
+        password = request.form["password"]
+        if username != "User" or password != "password":
+            flash("Error: Invalid username or password.", "danger")
+            return redirect(url_for("users.login"))
         session["username"] = username
         flash("Success: session added successfully.", "success")
         return redirect(url_for("users.get_profile"))

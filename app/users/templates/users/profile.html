@@ -4,8 +4,80 @@
 
 {% block content %}
 
-<h1>Hi, {{ username }}</h1>
+<main class="profile-page {% if color_scheme == 'dark' %}dark-scheme{% else %}light-scheme{% endif %}">
+<section class="greeting">
+    <div class="container">
+        <h2>Ласкаво просимо до сторінки, {{ username }}!</h2>
+        <a href="{{ url_for('users.logout') }}" class="logout">Вихід</a>
+        <a href="{{ url_for('users.change_color_scheme') }}" class="change-color">Змінити кольорову схему</a>
+    </div>
 
+</section>
+<section class="cookies">
+    <div class="container">
+        <div class="add-cookies">
+            <div class="add-cookies-form">
+                <h2>Додати кукі</h2>
+                <form action="{{ url_for('users.add_cookie') }}" method="POST">
+                    <label for="cookie-key-add">Ключ кукі:</label>
+                    <input type="text" id="cookie-key-add" name="cookie-key-add" required>
 
-<a href="{{url_for('users.logout')}}">logout</a>
+                    <label for="cookie-value-add">Значення кукі:</label>
+                    <input type="text" id="cookie-value-add" name="cookie-value-add" required>
+
+                    <label for="cookie-expire-add">Термін дії:</label>
+                    <input type="number" id="cookie-expire-add" name="cookie-expire-add" required>
+
+                    <button class="add-cookie-submit" type="submit">Додати кукі</button>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="remove-cookies my-5">
+            <div class="remove-cookies-form">
+                <h2>Видалити кукі за ключем</h2>
+                <form action="{{ url_for('users.remove_cookie') }}" method="POST">
+                    <label for="cookie-key-remove">Ключ кукі для видалення:</label>
+                    <input type="text" id="cookie-key-remove" name="cookie-key-remove" required>
+
+                    <button class="add-cookie-submit" type="submit">Видалити кукі за ключем</button>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="remove-all-cookies my-5">
+            <div class="remove-cookies-form">
+                <h2>Видалити всі кукі</h2>
+                <form action="{{ url_for('users.remove_all_cookies') }}" method="POST">
+                    <button class="add-cookie-submit" type="submit">Видалити всі кукі</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="cookies-result">
+            <h2>Список всіх кукі</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ключ</th>
+                        <th>Значення</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in cookies.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+</main>
+
 {% endblock %}

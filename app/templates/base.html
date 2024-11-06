@@ -22,6 +22,18 @@
 
 <body>
     {% block header %}
+        <nav class="main-navbar">
+            <div class="container d-flex">
+                <a href="{{ url_for('main') }}">Головна</a>
+                <ul class="ms-auto d-flex gap-5">
+                    <li><a href="{{ url_for('resume') }}">Резюме</a></li>
+                    <li><a href="{{ url_for('users.login') }}">Логін</a></li>
+                    <li><a href="{{ url_for('users.get_profile') }}">Профіль</a></li>
+                </ul>
+
+            </div>
+
+        </nav>
     {% endblock %}
     {% block content %}
     Hello

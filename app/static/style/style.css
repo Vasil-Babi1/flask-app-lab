@@ -97,3 +97,140 @@ footer p {
 .age.not-provided {
     color: red;
 }
+.main-navbar {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 0;
+}
+.main-navbar a {
+    color: #ffffff;
+    font-weight: 500;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+.main-navbar a:hover {
+    color: #ced4da;
+}
+.main-navbar li {
+    list-style-type: none;
+}
+.login-form {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.add-cookies, .remove-cookies, .remove-all-cookies, .cookies-result {
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-cookie-submit, .remove-cookie-submit, .remove-all-cookies-submit {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.add-cookie-submit:hover, .remove-cookie-submit:hover, .remove-all-cookies-submit:hover {
+    background-color: #0056b3;
+}
+
+.logout {
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.logout:hover {
+    background-color: #c82333;
+}
+
+.change-color {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.dark-scheme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-scheme .change-color {
+    background-color: #919191;
+    color: #343a40;
+}
+
+.dark-scheme .add-cookies,
+.dark-scheme .remove-cookies,
+.dark-scheme .cookies-result {
+    background-color: rgba(30, 30, 30, 0.8);
+}
