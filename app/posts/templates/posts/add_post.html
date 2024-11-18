@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
+{% from 'form_macros.html' import render_field %}
 
 {% block title %} Add POST {% endblock %}
 
 {% block content %}
 
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        {{ form.title.label }} {{ form.title() }}
-            {% for error in form.title.errors %}
-                <small>{{ error }}</small><br>
-            {% endfor %}
-
-        {{ form.content.label }} {{ form.content() }}
-        {{ form.submit() }}
-    </form>
-
-    <a href="{{ url_for("posts.get_posts") }}">Return posts</a>
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="border p-4 rounded shadow-sm">
+                <h2 class="mb-4">Add New Post</h2>
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    {{ render_field(form.title) }}
+                    {{ render_field(form.content) }}
+                    {{ render_field(form.publish_date) }}
+                    {{ render_field(form.category) }}
+                    {{ render_field(form.is_active, is_checkbox=true) }}
+                    {{ form.submit(class="btn btn-primary mt-3") }}
+                </form>
+                <div class="mt-3">
+                    <a href="{{ url_for('posts.get_posts') }}" class="btn btn-secondary">Return to Posts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

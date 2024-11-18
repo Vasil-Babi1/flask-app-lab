@@ -4,14 +4,40 @@
 
 {% block content %}
 
-<h1>Articles</h1>
-    
-<ul>
-    {% for post in posts%}
-        <li> {{post["id"]}} -  
-            <a href="post/{{post['id']}}">{{post["title"]}}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <div class="container">
+        <h1 class="my-3 text-center">Статті</h1>
+
+
+        <div class="row">
+            {% for post in posts %}
+                <div class="col col-md-4 mb-3">
+                    <div class="card h-100">
+                        <h5 class="card-header">
+                            {{ post.category }}
+                        </h5>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+
+                            <small class="text-muted">
+                                <i class="fa-solid fa-calendar-days"></i> {{ post.publication_date }}
+                                <i class="fa-solid fa-user"></i> {{ post.author }}
+                            </small>
+
+
+                            <p class="card-text">{{ post.content }}</p>
+                            <a href="{{ url_for('posts.detail_post', id=post.id) }}" class="btn btn-primary">Читати
+                                далі
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col-md-12 mt-3">
+                <a href="{{ url_for('posts.add_post') }}" class="btn btn-primary">Додати статтю</a>
+            </div>
+
+        </div>
+
+    </div>
 
 {% endblock %}
