@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %} POSTS {% endblock %}
-
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/posts.css') }}">
+{% endblock %}
 {% block content %}
 
     <div class="container">
-        <h1 class="my-3 text-center">Статті</h1>
+        <h1 class="my-3 text-center myclass">Статті</h1>
 
 
         <div class="row">
@@ -17,6 +19,7 @@
                         </h5>
                         <div class="card-body">
                             <h5 class="card-title">{{ post.title }}</h5>
+                            <img class="card-img-top" height="150" src="{{ url_for('.static', filename='img/default.png') }}" alt="">
 
                             <small class="text-muted">
                                 <i class="fa-solid fa-calendar-days"></i> {{ post.publication_date }}
@@ -32,9 +35,9 @@
                     </div>
                 </div>
             {% endfor %}
-            <div class="col-md-12 mt-3">
-                <a href="{{ url_for('posts.add_post') }}" class="btn btn-primary">Додати статтю</a>
-            </div>
+            <form action="{{ url_for('posts.add_post')}} ">
+                <button type="submit" class="btn btn-primary">Додати статтю</button>
+            </form>
 
         </div>
 
