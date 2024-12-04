@@ -31,6 +31,8 @@
                             <a href="{{ url_for('posts.detail_post', id=post.id) }}" class="btn btn-primary">Читати
                                 далі
                             </a>
+                            <a href="{{ url_for('posts.edit_post', id=post.id) }}" class="btn btn-warning">Редагувати</a>
+                            <a href="{{ url_for('posts.delete_post', id=post.id) }}" class="btn btn-danger">Видалити</a>
                         </div>
                     </div>
                 </div>
